@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizze+ • Gestão Financeira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="unauthenticated">
+  <section id="auth-screen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand"><div class="brand-mark">O+</div><div><strong>Organizze+</strong><small>GESTÃO FINANCEIRA</small></div></div>
+      <span class="eyebrow">SEU NEGÓCIO, EM EQUILÍBRIO</span>
+      <h1 id="auth-title">Acesse sua conta</h1>
+      <p id="auth-subtitle" class="auth-subtitle">Entre para acompanhar as receitas e despesas do seu espaço.</p>
+      <form id="auth-form">
+        <label id="auth-name-wrap" class="auth-field hidden">Seu nome<input id="auth-name" name="name" autocomplete="name" minlength="2" placeholder="Como podemos te chamar?"></label>
+        <label class="auth-field">E-mail<input id="auth-email" name="email" type="email" autocomplete="username" required placeholder="seu@email.com"></label>
+        <label class="auth-field">Senha<input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Pelo menos 8 caracteres"></label>
+        <p id="auth-error" class="form-error" role="alert"></p>
+        <button id="auth-submit" class="primary-btn auth-submit" type="submit">Entrar</button>
+      </form>
+      <p id="auth-mode-note" class="auth-mode-note"></p>
+      <button id="auth-mode-toggle" class="auth-toggle" type="button">Criar uma conta</button>
+      <p class="auth-security">🔒 Acesso protegido por senha. Use uma senha que você não compartilha com outras pessoas.</p>
+    </div>
+  </section>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">O+</div><div><strong>Organizze+</strong><small>GESTÃO FINANCEIRA</small></div></div>
+    <div class="side-label">MENU PRINCIPAL</div>
+    <nav>
+      <button class="nav-item active" data-page="dashboard"><span>⌂</span> Visão geral</button>
+      <button class="nav-item" data-page="receitas"><span>↗</span> Receitas</button>
+      <button class="nav-item" data-page="despesas"><span>↙</span> Despesas</button>
+      <button class="nav-item" data-page="relatorios"><span>▤</span> Relatórios</button>
+      <button class="nav-item" data-page="categorias"><span>▦</span> Categorias</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="profile-avatar" id="sidebar-avatar">U</div><div><strong id="sidebar-user-name">Usuário</strong><small>Conta do estabelecimento</small></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">ESPAÇO DE ESTÉTICA</span><h1 id="page-title">Visão geral</h1></div><div class="top-actions"><span id="today-label"></span><div class="top-avatar" id="top-avatar">U</div><button id="logout-button" class="logout-button" type="button">Sair</button></div></header>
+    <section id="dashboard-page" class="page active">
+      <div class="welcome"><div><span class="eyebrow light">SEU NEGÓCIO, EM EQUILÍBRIO</span><h2>Olá, <span id="welcome-name">bem-vinda</span>! <span>♡</span></h2><p>Acompanhe de perto a saúde financeira do seu espaço.</p></div><label class="month-select">Período <input type="month" id="dashboard-month"></label></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Receitas do mês</span><span class="stat-icon green">↗</span></div><strong id="total-receitas">R$ 0,00</strong><small>Valores recebidos</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Despesas do mês</span><span class="stat-icon coral">↙</span></div><strong id="total-despesas">R$ 0,00</strong><small>Valores gastos</small></article>
+        <article class="stat-card balance"><div class="stat-top"><span>Saldo do mês</span><span class="stat-icon lilac">◈</span></div><strong id="total-saldo">R$ 0,00</strong><small>Receitas menos despesas</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Movimentações</span><span class="stat-icon sand">▤</span></div><strong id="total-movimentos">0</strong><small>Registros no período</small></article>
+      </div>
+      <div class="dashboard-grid">
+        <article class="panel chart-panel"><div class="panel-heading"><div><h3>Movimentação financeira</h3><p>Entradas e saídas ao longo do mês</p></div><span class="legend"><i class="dot income"></i> Receitas <i class="dot expense"></i> Despesas</span></div><div id="chart" class="chart"></div></article>
+        <article class="panel"><div class="panel-heading"><div><h3>Resumo por categoria</h3><p>Distribuição das movimentações</p></div></div><div id="category-summary" class="category-summary"></div></article>
+      </div>
+      <article class="panel recent-panel"><div class="panel-heading"><div><h3>Últimas movimentações</h3><p>Registros mais recentes do estabelecimento</p></div><button class="text-button" data-goto="receitas">Ver movimentações →</button></div><div class="table-wrap"><table><thead><tr><th>Descrição</th><th>Categoria</th><th>Data</th><th>Tipo</th><th class="right">Valor</th></tr></thead><tbody id="recent-table"></tbody></table></div></article>
+    </section>
+
+    <section id="receitas-page" class="page">
+      <div class="page-intro"><div><h2>Receitas</h2><p>Registre e acompanhe os valores recebidos pelos serviços.</p></div><button class="primary-btn" id="add-income">＋ Nova receita</button></div>
+      <div class="filter-bar"><input id="income-search" placeholder="Buscar movimentação..."><input type="date" id="income-from" aria-label="Data inicial"><input type="date" id="income-to" aria-label="Data final"><button class="secondary-btn" id="income-clear">Limpar filtros</button></div>
+      <div class="panel"><div class="table-wrap"><table><thead><tr><th>Descrição</th><th>Cliente</th><th>Categoria</th><th>Data</th><th>Pagamento</th><th class="right">Valor</th><th></th></tr></thead><tbody id="income-table"></tbody></table></div></div>
+    </section>
+
+    <section id="despesas-page" class="page">
+      <div class="page-intro"><div><h2>Despesas</h2><p>Organize os gastos e acompanhe para onde o dinheiro está indo.</p></div><button class="primary-btn" id="add-expense">＋ Nova despesa</button></div>
+      <div class="filter-bar"><input id="expense-search" placeholder="Buscar movimentação..."><input type="date" id="expense-from" aria-label="Data inicial"><input type="date" id="expense-to" aria-label="Data final"><button class="secondary-btn" id="expense-clear">Limpar filtros</button></div>
+      <div class="panel"><div class="table-wrap"><table><thead><tr><th>Descrição</th><th>Categoria</th><th>Data</th><th>Pagamento</th><th class="right">Valor</th><th></th></tr></thead><tbody id="expense-table"></tbody></table></div></div>
+    </section>
+
+    <section id="relatorios-page" class="page">
+      <div class="page-intro"><div><h2>Relatórios financeiros</h2><p>Compare receitas e despesas no período escolhido.</p></div><button class="secondary-btn" id="print-report">Imprimir relatório</button></div>
+      <div class="filter-bar"><label>De <input type="date" id="report-from"></label><label>Até <input type="date" id="report-to"></label><button class="primary-btn" id="generate-report">Gerar relatório</button></div>
+      <div class="stats-grid report-stats"><article class="stat-card"><span>Receitas</span><strong id="report-income">R$ 0,00</strong></article><article class="stat-card"><span>Despesas</span><strong id="report-expense">R$ 0,00</strong></article><article class="stat-card balance"><span>Resultado</span><strong id="report-balance">R$ 0,00</strong></article><article class="stat-card"><span>Movimentações</span><strong id="report-count">0</strong></article></div>
+      <article class="panel"><div class="panel-heading"><div><h3>Totais por categoria</h3><p>Valores registrados em cada categoria</p></div></div><div class="table-wrap"><table><thead><tr><th>Categoria</th><th>Tipo</th><th>Quantidade</th><th class="right">Total</th></tr></thead><tbody id="report-table"></tbody></table></div></article>
+    </section>
+
+    <section id="categorias-page" class="page">
+      <div class="page-intro"><div><h2>Categorias</h2><p>Organize os tipos de receitas e despesas do espaço.</p></div><button class="primary-btn" id="add-category">＋ Nova categoria</button></div>
+      <div class="category-columns"><article class="panel"><div class="panel-heading"><h3>Receitas</h3></div><div id="income-categories" class="category-list"></div></article><article class="panel"><div class="panel-heading"><h3>Despesas</h3></div><div id="expense-categories" class="category-list"></div></article></div>
+    </section>
+    <footer>Organizze+ • Sistema de gestão financeira <span>Organização que cuida do seu negócio.</span></footer>
+  </main>
+
+  <div class="modal-backdrop" id="transaction-modal"><form class="modal" id="transaction-form"><div class="modal-heading"><div><span class="eyebrow">MOVIMENTAÇÃO FINANCEIRA</span><h2 id="transaction-modal-title">Nova receita</h2></div><button type="button" class="close-btn" data-close="transaction-modal">×</button></div><input type="hidden" id="transaction-id"><input type="hidden" id="transaction-type">
+    <label>Descrição<input id="transaction-description" required maxlength="100" placeholder="Ex.: Depilação de pernas"></label>
+    <label id="client-name-field" hidden>Nome da cliente<input id="transaction-client-name" maxlength="100" placeholder="Ex.: Ana Souza"></label>
+    <div class="form-row"><label>Valor (R$)<input id="transaction-amount" type="number" min="0.01" step="0.01" required placeholder="0,00"></label><label>Data<input id="transaction-date" type="date" required></label></div>
+    <div class="form-row"><label>Categoria<select id="transaction-category" required></select></label><label>Forma de pagamento<select id="transaction-payment"><option>Pix</option><option>Dinheiro</option><option>Cartão de crédito</option><option>Cartão de débito</option><option>Transferência</option><option>Boleto</option><option>Não informado</option></select></label></div>
+    <label>Observações<textarea id="transaction-notes" rows="3" placeholder="Informações adicionais (opcional)"></textarea></label><p class="form-error" id="transaction-error"></p><div class="modal-actions"><button type="button" class="secondary-btn" data-close="transaction-modal">Cancelar</button><button type="submit" class="primary-btn">Salvar movimentação</button></div>
+  </form></div>
+
+  <div class="modal-backdrop" id="category-modal"><form class="modal small-modal" id="category-form"><div class="modal-heading"><div><span class="eyebrow">ORGANIZAÇÃO</span><h2 id="category-modal-title">Nova categoria</h2></div><button type="button" class="close-btn" data-close="category-modal">×</button></div><input type="hidden" id="category-id"><label>Nome da categoria<input id="category-name" required maxlength="50" placeholder="Ex.: Manutenção"></label><label>Tipo<select id="category-type"><option value="receita">Receita</option><option value="despesa">Despesa</option></select></label><label>Cor de identificação<input id="category-color" type="color" value="#8b6bb1"></label><p class="form-error" id="category-error"></p><div class="modal-actions"><button type="button" class="secondary-btn" data-close="category-modal">Cancelar</button><button type="submit" class="primary-btn">Salvar categoria</button></div></form></div>
+  <div class="toast" id="toast"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
